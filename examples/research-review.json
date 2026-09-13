@@ -1,0 +1,21 @@
+{
+  "name": "research-review",
+  "description": "Synthetic offline demonstration: two independent analyses feed one synthesis.",
+  "stages": [
+    {
+      "id": "research",
+      "title": "Parallel analysis",
+      "nodes": [
+        {"id": "usability", "agent": {}, "taskPrompt": "List usability questions for a fictional library app.", "contract": {"outputPath": "usability.txt"}},
+        {"id": "reliability", "agent": {}, "taskPrompt": "List reliability questions for the same fictional app.", "contract": {"outputPath": "reliability.txt"}}
+      ]
+    },
+    {
+      "id": "review",
+      "title": "Review both outputs",
+      "nodes": [
+        {"id": "summary", "agent": {}, "taskPrompt": "Combine the two analyses and identify unresolved questions.", "consumes": ["research"], "contract": {"outputPath": "summary.json", "schema": {"type": "object", "properties": {"summary": {"type": "string"}}, "required": ["summary"]}}}
+      ]
+    }
+  ]
+}
